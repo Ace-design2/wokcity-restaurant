@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       
       {/* Main content with side cart panel */}
-      <main className="w-full max-w-[1440px] mx-auto flex flex-col lg:flex-row px-8 xl:px-24 py-16 gap-12 shrink-0 relative">
+      <main className="w-full max-w-[1440px] mx-auto flex flex-col lg:flex-row px-4 sm:px-8 xl:px-24 py-8 md:py-16 gap-8 md:gap-12 shrink-0 relative">
         
         {/* Left side: Product Grid */}
         <div className="flex-1">

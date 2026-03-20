@@ -15,7 +15,7 @@ export default function ProductCard({
   imageUrl,
 }: ProductCardProps) {
   return (
-    <div className="w-48 bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group relative">
+    <div className="w-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group relative">
       <div className="w-full h-40 relative overflow-hidden bg-neutral-100 flex-shrink-0">
         <img
           src={imageUrl}
