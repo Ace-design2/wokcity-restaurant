@@ -141,7 +141,7 @@ export default function ProductGrid() {
       </div>
 
       {filteredAndSortedProducts.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-3 sm:gap-x-8 gap-y-6 sm:gap-y-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 sm:gap-x-8 lg:gap-x-4 xl:gap-x-8 gap-y-6 sm:gap-y-10 lg:gap-y-6 xl:gap-y-10">
           {filteredAndSortedProducts.map((product) => (
             <div key={product.id} className="flex justify-center">
               <ProductCard
