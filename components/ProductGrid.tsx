@@ -10,7 +10,7 @@ const MOCK_PRODUCTS = Array.from({ length: 24 }).map((_, i) => ({
   name: `Wok Meal ${i + 1}`,
   description: 'A delicious customized wok meal to enjoy...',
   category: CATEGORIES[(i % 5) + 1],
-  price: Math.round((Math.random() * 40 + 10) * 100) / 100,
+  price: Math.floor(15000 + ((i * 37) % 30000)),
   imageUrl: `/images/food${(i % 10) + 1}.jpg`,
 }));
 
@@ -81,12 +81,12 @@ export default function ProductGrid() {
       result = result.filter(p => p.category === activeCategory);
     }
 
-    if (priceRange === "Under $20") {
-      result = result.filter(p => p.price < 20);
-    } else if (priceRange === "$20 - $35") {
-      result = result.filter(p => p.price >= 20 && p.price <= 35);
-    } else if (priceRange === "Over $35") {
-      result = result.filter(p => p.price > 35);
+    if (priceRange === "Under ₦20,000") {
+      result = result.filter(p => p.price < 20000);
+    } else if (priceRange === "₦20,000 - ₦35,000") {
+      result = result.filter(p => p.price >= 20000 && p.price <= 35000);
+    } else if (priceRange === "Over ₦35,000") {
+      result = result.filter(p => p.price > 35000);
     }
 
     if (sortOrder === "Price: Ascending") {
@@ -127,7 +127,7 @@ export default function ProductGrid() {
           <MinimalDropdown 
             label="Price"
             value={priceRange}
-            options={["All Prices", "Under $20", "$20 - $35", "Over $35"]}
+            options={["All Prices", "Under ₦20,000", "₦20,000 - ₦35,000", "Over ₦35,000"]}
             onChange={setPriceRange}
           />
           <span className="w-px h-4 bg-neutral-200 mx-2" />

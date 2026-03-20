@@ -43,7 +43,7 @@ export default function ProductCard({
             </p>
           </div>
           <div className="text-red-950 text-base font-bold shrink-0">
-            ${price.toFixed(2)}
+            ₦{price.toLocaleString()}
           </div>
         </div>
 

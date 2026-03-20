@@ -27,7 +27,7 @@ export default function CartPanel() {
               </button>
             </div>
             <div className="flex items-center justify-between mt-auto">
-              <span className="text-sm font-semibold text-black">$24.99</span>
+              <span className="text-sm font-semibold text-black">₦24,500</span>
               <div className="flex items-center gap-3">
                 <button className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-black hover:border-black transition-colors focus:outline-none">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/></svg>
@@ -57,7 +57,7 @@ export default function CartPanel() {
               </button>
             </div>
             <div className="flex items-center justify-between mt-auto">
-              <span className="text-sm font-semibold text-black">$29.99</span>
+              <span className="text-sm font-semibold text-black">₦32,000</span>
               <div className="flex items-center gap-3">
                 <button className="w-6 h-6 rounded-full border border-neutral-200 flex items-center justify-center text-neutral-400 hover:text-black hover:border-black transition-colors focus:outline-none">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/></svg>
@@ -76,7 +76,7 @@ export default function CartPanel() {
         <div className="pt-6 border-t border-neutral-100">
           <div className="flex justify-between items-center mb-3">
             <span className="text-sm text-neutral-500 font-medium">Subtotal</span>
-            <span className="text-sm font-medium text-black">$84.97</span>
+            <span className="text-sm font-medium text-black">₦56,500</span>
           </div>
           <div className="flex justify-between items-center mb-6">
             <span className="text-sm text-neutral-500 font-medium">Delivery</span>
@@ -84,7 +84,7 @@ export default function CartPanel() {
           </div>
           <div className="flex justify-between items-center mb-8">
             <span className="text-base font-semibold text-black">Total</span>
-            <span className="text-lg font-semibold text-black">$84.97</span>
+            <span className="text-lg font-semibold text-black">₦56,500</span>
           </div>
           <button className="w-full py-4 bg-black hover:bg-neutral-800 transition-colors rounded-full text-white text-sm font-medium flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
             Continue to Checkout
