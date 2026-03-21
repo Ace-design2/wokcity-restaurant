@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function CartPanel() {
   return (
-    <div className="w-full bg-white h-full flex flex-col pt-2">
-      <div className="px-6 pb-6">
+    <div className="w-full bg-white h-fit max-h-full flex flex-col pt-2 rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+      <div className="px-6 pb-6 pt-4">
         <h2 className="text-xl font-medium text-black flex items-center justify-between">
           Cart
           <span className="bg-neutral-100 text-neutral-600 font-medium text-xs px-2.5 py-1 rounded-full">3 items</span>
