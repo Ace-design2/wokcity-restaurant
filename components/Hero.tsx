@@ -21,7 +21,7 @@ export default function Hero() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-3 md:mb-4 leading-[1.1] md:leading-[1.1]">
             Experience the <br className="hidden sm:block"/> Art of the Wok.
           </h1>
-          <p className="text-base sm:text-lg text-neutral-200 font-light max-w-md mx-auto md:mx-0 mb-6 md:mb-8 leading-relaxed">
+          <p className="text-lg sm:text-xl text-white font-medium max-w-lg mx-auto md:mx-0 mb-6 md:mb-8 leading-relaxed">
             Fresh ingredients, intense heat, and authentic flavors delivered straight to your door.
           </p>
           <button className="px-6 py-3 md:px-8 md:py-4 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-100 hover:scale-105 active:scale-95 transition-all focus:outline-none shadow-lg">
