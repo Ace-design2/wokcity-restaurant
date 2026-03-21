@@ -9,6 +9,7 @@ interface ProductCardProps {
   description: string;
   price: number;
   imageUrl: string;
+  onClick?: () => void;
 }
 
 export default function ProductCard({
@@ -17,11 +18,15 @@ export default function ProductCard({
   description,
   price,
   imageUrl,
+  onClick,
 }: ProductCardProps) {
   const { addToCart } = useCart();
 
   return (
-    <div className="w-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group relative">
+    <div 
+      onClick={onClick}
+      className="w-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group relative cursor-pointer active:scale-[0.99]"
+    >
       <div className="w-full h-40 relative overflow-hidden bg-neutral-100 flex-shrink-0">
         <img
           src={imageUrl}

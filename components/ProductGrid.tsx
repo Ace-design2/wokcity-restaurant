@@ -2,6 +2,16 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import ProductCard from './ProductCard';
+import ProductModal from './ProductModal';
+
+type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  category: string;
+};
 
 const CATEGORIES = ["All", "Appetizers", "Main Course", "Side Dishes", "Desserts", "Snacks"];
 
@@ -73,6 +83,7 @@ export default function ProductGrid() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [priceRange, setPriceRange] = useState("All Prices");
   const [sortOrder, setSortOrder] = useState("Recommended");
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const filteredAndSortedProducts = useMemo(() => {
     let result = [...MOCK_PRODUCTS];
@@ -150,6 +161,7 @@ export default function ProductGrid() {
                 description={product.description}
                 price={product.price}
                 imageUrl={product.imageUrl}
+                onClick={() => setSelectedProduct(product)}
               />
             </div>
           ))}
@@ -165,6 +177,13 @@ export default function ProductGrid() {
           </button>
         </div>
       )}
+
+      {/* Embedded Product Details Modal */}
+      <ProductModal 
+        isOpen={!!selectedProduct} 
+        onClose={() => setSelectedProduct(null)} 
+        product={selectedProduct} 
+      />
     </div>
   );
 }
