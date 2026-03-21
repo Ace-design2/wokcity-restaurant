@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Product listing page for WokCity",
 };
 
+import { CartProvider } from "@/contexts/CartContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased bg-neutral-50 min-h-screen flex flex-col overflow-x-hidden w-full`}>
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

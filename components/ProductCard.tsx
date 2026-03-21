@@ -1,4 +1,7 @@
+"use client";
+
 import React from 'react';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   id: string;
@@ -9,11 +12,14 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({
+  id,
   name,
   description,
   price,
   imageUrl,
 }: ProductCardProps) {
+  const { addToCart } = useCart();
+
   return (
     <div className="w-full bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group relative">
       <div className="w-full h-40 relative overflow-hidden bg-neutral-100 flex-shrink-0">
@@ -47,7 +53,12 @@ export default function ProductCard({
           </div>
         </div>
 
-        <button className="w-full mt-auto px-3 py-1.5 bg-red-600 hover:bg-red-700 active:scale-[0.98] transition-all rounded-md flex justify-center items-center gap-1.5 focus:outline-none">
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            addToCart({ id, name, price, imageUrl });
+          }}
+          className="w-full mt-auto px-3 py-1.5 bg-red-600 hover:bg-red-700 active:scale-[0.98] transition-all rounded-md flex justify-center items-center gap-1.5 focus:outline-none">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white">
             <circle cx="9" cy="21" r="1.5" />
             <circle cx="20" cy="21" r="1.5" />
