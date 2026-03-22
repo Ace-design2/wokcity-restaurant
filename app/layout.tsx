@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 import { CartProvider } from "@/contexts/CartContext";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={`${openSans.className} antialiased bg-neutral-50 min-h-screen flex flex-col overflow-x-hidden w-full`}>
         <CartProvider>
           {children}
+          <Footer />
         </CartProvider>
       </body>
     </html>
