@@ -29,10 +29,11 @@ type DropdownProps = {
   value: string;
   options: string[];
   onChange: (val: string) => void;
+  align?: 'left' | 'right';
 };
 
 // Custom Tooltip Dropdown Component
-function MinimalDropdown({ label, value, options, onChange }: DropdownProps) {
+function MinimalDropdown({ label, value, options, onChange, align = 'right' }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -59,7 +60,7 @@ function MinimalDropdown({ label, value, options, onChange }: DropdownProps) {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-neutral-100/80 rounded-lg shadow-xl shadow-black-[0.03] py-2 z-50">
+        <div className={`absolute top-full ${align === 'left' ? 'left-0' : 'right-0'} mt-2 w-48 bg-white border border-neutral-100/80 rounded-lg shadow-xl shadow-black-[0.03] py-2 z-50`}>
           {options.map(opt => (
             <button
               key={opt}
@@ -140,6 +141,7 @@ export default function ProductGrid() {
             value={priceRange}
             options={["All Prices", "Under ₦20,000", "₦20,000 - ₦35,000", "Over ₦35,000"]}
             onChange={setPriceRange}
+            align="left"
           />
           <span className="w-px h-4 bg-neutral-200 mx-2" />
           <MinimalDropdown 
