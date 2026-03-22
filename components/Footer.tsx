@@ -19,18 +19,18 @@ export default function Footer() {
             <div className="flex flex-col gap-4">
               <span className="font-semibold text-black text-xs uppercase tracking-widest">Company</span>
               <div className="flex flex-col gap-3">
-                <Link href="/about" className="text-sm text-neutral-500 hover:text-black hover:translate-x-1 transition-all">Our Story</Link>
-                <Link href="/careers" className="text-sm text-neutral-500 hover:text-black hover:translate-x-1 transition-all">Careers</Link>
-                <Link href="/locations" className="text-sm text-neutral-500 hover:text-black hover:translate-x-1 transition-all">Locations</Link>
-                <Link href="/contact" className="text-sm text-neutral-500 hover:text-black hover:translate-x-1 transition-all">Contact Us</Link>
+                <Link href="/about" className="text-sm text-neutral-500 hover:text-black transition-colors">Our Story</Link>
+                <Link href="/careers" className="text-sm text-neutral-500 hover:text-black transition-colors">Careers</Link>
+                <Link href="/locations" className="text-sm text-neutral-500 hover:text-black transition-colors">Locations</Link>
+                <Link href="/contact" className="text-sm text-neutral-500 hover:text-black transition-colors">Contact Us</Link>
               </div>
             </div>
             <div className="flex flex-col gap-4">
               <span className="font-semibold text-black text-xs uppercase tracking-widest">Legal</span>
               <div className="flex flex-col gap-3">
-                <Link href="/privacy" className="text-sm text-neutral-500 hover:text-black hover:translate-x-1 transition-all">Privacy Policy</Link>
-                <Link href="/terms" className="text-sm text-neutral-500 hover:text-black hover:translate-x-1 transition-all">Terms of Service</Link>
-                <Link href="/cookies" className="text-sm text-neutral-500 hover:text-black hover:translate-x-1 transition-all">Cookie Policy</Link>
+                <Link href="/privacy" className="text-sm text-neutral-500 hover:text-black transition-colors">Privacy Policy</Link>
+                <Link href="/terms" className="text-sm text-neutral-500 hover:text-black transition-colors">Terms of Service</Link>
+                <Link href="/cookies" className="text-sm text-neutral-500 hover:text-black transition-colors">Cookie Policy</Link>
               </div>
             </div>
           </div>
