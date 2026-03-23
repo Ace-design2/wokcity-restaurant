@@ -2,6 +2,30 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import JourneySlider, { SlideData } from '@/components/JourneySlider';
+
+const journeySlides: SlideData[] = [
+  {
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200",
+    year: "2019",
+    description: "WokCity was founded"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=1200",
+    year: "2020",
+    description: "First kitchen opened"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200",
+    year: "2022",
+    description: "Expanded menu with new signature dishes"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=1200",
+    year: "2024",
+    description: "Serving thousands of customers daily"
+  }
+];
 
 export const metadata: Metadata = {
   title: 'Our Story | WokCity',
@@ -87,8 +111,8 @@ export default function AboutPage() {
       <main className="w-full max-w-[1440px] mx-auto px-6 md:px-8 xl:px-24 py-16 flex flex-col gap-24 overflow-x-hidden">
         
         {/* 2. Story Section — Main Narrative */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          <div className="max-w-[600px]">
+        <section className="flex flex-col gap-12 lg:gap-16">
+          <div className="max-w-[800px] mb-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-black mb-8 tracking-tight">Our Journey</h2>
             <div className="space-y-6 text-neutral-500 font-medium text-lg leading-relaxed">
               <p>
@@ -97,16 +121,15 @@ export default function AboutPage() {
               <p>
                 Rooted in the heart of Abeokuta, our mission is to redefine fast-casual dining. We believe in the power of community, bringing people together over steaming bowls of perfectly balanced flavors.
               </p>
-              <p>
-                Our food philosophy focuses on quality above all. From hand-picked vegetables to premium proteins, every ingredient is carefully selected. At WokCity, we don't just cook food; we craft experiences that make every meal memorable.
-              </p>
             </div>
           </div>
-          <div className="relative h-[400px] lg:h-[500px] rounded-[2rem] overflow-hidden shadow-lg border border-neutral-100">
-            <img 
-              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1200" 
-              alt="Restaurant Interior" 
-              className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+          <div className="w-full">
+            <JourneySlider 
+              images={journeySlides} 
+              autoPlay={true} 
+              interval={4000} 
+              showDots={true} 
+              showArrows={true} 
             />
           </div>
         </section>
