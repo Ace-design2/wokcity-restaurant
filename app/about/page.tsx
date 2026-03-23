@@ -98,7 +98,7 @@ export default function AboutPage() {
               Fresh ingredients. Fast service. Bold flavors made for everyday life.
             </p>
             <Link 
-              href="/shop" 
+              href="/" 
               className="inline-flex px-8 py-4 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-100 hover:scale-105 active:scale-95 transition-all shadow-lg"
             >
               View Our Menu
@@ -233,7 +233,7 @@ export default function AboutPage() {
             Ready to taste the difference?
           </h2>
           <Link 
-            href="/shop" 
+            href="/" 
             className="inline-block px-10 py-5 bg-black text-white text-base font-semibold rounded-full hover:bg-neutral-800 hover:scale-105 active:scale-95 transition-all shadow-md"
           >
             Order Now
