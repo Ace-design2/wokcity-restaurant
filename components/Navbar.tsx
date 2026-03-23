@@ -2,9 +2,17 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: 'Menu', href: '/' },
+    { name: 'Our Story', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-neutral-100">
@@ -13,15 +21,20 @@ export default function Navbar() {
           WokCity<span className="text-red-600">.</span>
         </Link>
         <nav className="hidden md:flex items-center gap-10">
-          <Link href="/" className="text-sm font-medium text-black hover:text-red-600 transition-colors">
-            Menu
-          </Link>
-          <Link href="/about" className="text-sm font-medium text-neutral-500 hover:text-black transition-colors">
-            Our Story
-          </Link>
-          <Link href="/contact" className="text-sm font-medium text-neutral-500 hover:text-black transition-colors">
-            Contact
-          </Link>
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-sm transition-colors hover:text-red-600 ${
+                  isActive ? 'font-bold text-black' : 'font-medium text-neutral-500'
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
         {/* Mobile Menu Icon */}
         <button 
@@ -48,15 +61,21 @@ export default function Navbar() {
       <div 
         className={`md:hidden absolute top-[80px] left-0 w-full bg-white border-b border-neutral-100 px-8 flex flex-col shadow-lg shadow-black/5 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${isMobileMenuOpen ? 'max-h-[400px] py-6 gap-6 opacity-100' : 'max-h-0 py-0 gap-0 opacity-0 pointer-events-none'}`}
       >
-        <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-black hover:text-red-600 transition-colors">
-          Menu
-        </Link>
-        <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-neutral-600 hover:text-black transition-colors">
-          Our Story
-        </Link>
-        <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium text-neutral-600 hover:text-black transition-colors">
-          Contact
-        </Link>
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-lg transition-colors hover:text-red-600 ${
+                isActive ? 'font-bold text-black' : 'font-medium text-neutral-600'
+              }`}
+            >
+              {link.name}
+            </Link>
+          );
+        })}
       </div>
     </header>
   );
