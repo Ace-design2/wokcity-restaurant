@@ -90,8 +90,8 @@ export default function ContactPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Phone Card */}
-            <div className="bg-white rounded-xl border border-neutral-200 p-6 flex flex-col items-start hover:shadow-sm transition-shadow duration-300">
-              <div className="w-12 h-12 rounded-full bg-neutral-100 text-black flex items-center justify-center shrink-0 mb-6">
+            <div className="bg-white rounded-xl border border-neutral-200 hover:border-red-600 p-6 flex flex-col items-start hover:shadow-sm transition-all duration-300 group">
+              <div className="w-12 h-12 rounded-full bg-neutral-100 text-black flex items-center justify-center shrink-0 mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
                 <PhoneIcon />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">Call Us</h3>
@@ -100,8 +100,8 @@ export default function ContactPage() {
             </div>
 
             {/* WhatsApp Card */}
-            <div className="bg-white rounded-xl border border-neutral-200 p-6 flex flex-col items-start hover:shadow-sm transition-shadow duration-300">
-              <div className="w-12 h-12 rounded-full bg-neutral-100 text-green-600 flex items-center justify-center shrink-0 mb-6">
+            <div className="bg-white rounded-xl border border-neutral-200 hover:border-red-600 p-6 flex flex-col items-start hover:shadow-sm transition-all duration-300 group">
+              <div className="w-12 h-12 rounded-full bg-neutral-100 text-green-600 flex items-center justify-center shrink-0 mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
                 <WhatsAppIcon />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">WhatsApp</h3>
@@ -112,8 +112,8 @@ export default function ContactPage() {
             </div>
 
             {/* Location Card */}
-            <div className="bg-white rounded-xl border border-neutral-200 p-6 flex flex-col items-start hover:shadow-sm transition-shadow duration-300">
-              <div className="w-12 h-12 rounded-full bg-neutral-100 text-red-600 flex items-center justify-center shrink-0 mb-6">
+            <div className="bg-white rounded-xl border border-neutral-200 hover:border-red-600 p-6 flex flex-col items-start hover:shadow-sm transition-all duration-300 group">
+              <div className="w-12 h-12 rounded-full bg-neutral-100 text-red-600 flex items-center justify-center shrink-0 mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
                 <LocationIcon />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">Visit Us</h3>
@@ -122,8 +122,8 @@ export default function ContactPage() {
             </div>
 
             {/* Email Card */}
-            <div className="bg-white rounded-xl border border-neutral-200 p-6 flex flex-col items-start hover:shadow-sm transition-shadow duration-300">
-              <div className="w-12 h-12 rounded-full bg-neutral-100 text-black flex items-center justify-center shrink-0 mb-6">
+            <div className="bg-white rounded-xl border border-neutral-200 hover:border-red-600 p-6 flex flex-col items-start hover:shadow-sm transition-all duration-300 group">
+              <div className="w-12 h-12 rounded-full bg-neutral-100 text-black flex items-center justify-center shrink-0 mb-6 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
                 <EmailIcon />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">Email Us</h3>
