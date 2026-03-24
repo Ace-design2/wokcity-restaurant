@@ -248,7 +248,7 @@ export default function AboutPage() {
 // Reusable Components
 
 const HighlightCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
-  <div className="bg-white rounded-xl border border-neutral-200 p-6 flex flex-col gap-4 items-start hover:shadow-sm transition-all duration-300 group">
+  <div className="bg-white rounded-xl border border-neutral-200 hover:border-red-600 p-6 flex flex-col gap-4 items-start hover:shadow-sm transition-all duration-300 group">
     <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
       {icon}
     </div>
