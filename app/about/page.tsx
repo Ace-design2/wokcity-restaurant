@@ -77,7 +77,7 @@ export default function AboutPage() {
       <Navbar />
 
       {/* 1. Hero Section — Story Introduction */}
-      <section className="w-full h-[420px] relative flex items-center shrink-0 overflow-hidden bg-black">
+      <section className="w-full h-[420px] md:h-auto relative flex items-center shrink-0 overflow-hidden bg-black">
         <img 
           src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=2000" 
           alt="Wok cooking in action" 
@@ -86,7 +86,7 @@ export default function AboutPage() {
         {/* Dark gradient overlay matching the design system */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
         
-        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-8 xl:px-24">
+        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-8 md:py-16 xl:px-24">
           <div className="max-w-xl text-left">
             <span className="inline-block text-white text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-80">
               Our Story
