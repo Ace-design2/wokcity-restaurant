@@ -77,7 +77,7 @@ export default function AboutPage() {
       <NavbarFloating />
 
       {/* 1. Hero Section — Story Introduction */}
-      <section className="w-full h-[420px] md:h-auto relative flex items-center shrink-0 overflow-hidden bg-black">
+      <section className="w-full h-[420px] md:h-auto relative flex items-center shrink-0 overflow-hidden bg-black pt-[88px]">
         <img 
           src="https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&q=80&w=2000" 
           alt="Wok cooking in action" 

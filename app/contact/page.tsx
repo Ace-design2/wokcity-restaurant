@@ -40,7 +40,7 @@ export default function ContactPage() {
       <NavbarFloating />
 
       {/* 1. Hero Section — Contact Introduction */}
-      <section className="w-full h-[420px] relative flex items-center justify-start shrink-0 overflow-hidden bg-black">
+      <section className="w-full h-[420px] relative flex items-center justify-start shrink-0 overflow-hidden bg-black pt-[104px] pb-12">
         <img 
           src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=2000" 
           alt="WokCity Restaurant Interior" 

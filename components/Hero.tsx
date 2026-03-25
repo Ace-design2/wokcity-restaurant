@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Hero() {
   return (
-    <section className="w-full h-[380px] md:h-[450px] relative flex items-center shrink-0 overflow-hidden">
+    <section className="w-full h-[380px] md:h-[450px] relative flex items-center shrink-0 overflow-hidden pt-[140px] pb-36">
       <img 
         src="/images/hero.jpg" 
         alt="Hero Background" 
