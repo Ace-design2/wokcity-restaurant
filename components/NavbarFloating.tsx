@@ -36,7 +36,7 @@ export default function NavbarFloating() {
       <nav 
         className={`w-full max-w-[1200px] pointer-events-auto rounded-2xl flex items-center justify-between px-6 md:px-8 xl:px-12 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform border ${
           isScrolled 
-            ? 'h-[56px] bg-white shadow-md border-neutral-200' 
+            ? 'h-[56px] bg-white/90 backdrop-blur-md shadow-md border-neutral-200' 
             : 'h-[64px] bg-white/80 backdrop-blur-md shadow-sm border-neutral-100/50'
         }`}
       >
