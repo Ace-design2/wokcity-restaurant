@@ -3,6 +3,7 @@ import NavbarFloating from '@/components/NavbarFloating';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import JourneySlider, { SlideData } from '@/components/JourneySlider';
+import StatsSection from '@/components/StatsSection';
 
 const journeySlides: SlideData[] = [
   {
@@ -175,14 +176,7 @@ export default function AboutPage() {
         </section>
 
         {/* 4. Stats Section — Trust Indicators */}
-        <section className="py-16 md:py-20 border-y border-neutral-100 bg-white/50 rounded-3xl">
-          <div className="flex flex-wrap justify-center items-center gap-12 sm:gap-20 md:gap-32 text-center px-4">
-            <StatItem value="10,000+" label="Meals Served" />
-            <StatItem value="5+" label="Years Experience" />
-            <StatItem value="4.8★" label="Customer Rating" />
-            <StatItem value="100%" label="Fresh Ingredients" />
-          </div>
-        </section>
+        <StatsSection />
 
         {/* 5. Mission & Vision Section */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
@@ -256,13 +250,6 @@ const HighlightCard = ({ icon, title, description }: { icon: React.ReactNode, ti
       <h3 className="text-lg font-bold text-black mb-2">{title}</h3>
       <p className="text-neutral-500 font-medium text-sm leading-relaxed">{description}</p>
     </div>
-  </div>
-);
-
-const StatItem = ({ value, label }: { value: string, label: string }) => (
-  <div className="flex flex-col items-center justify-center gap-2">
-    <span className="text-4xl md:text-5xl lg:text-6xl font-black text-black tracking-tighter">{value}</span>
-    <span className="text-xs md:text-sm font-bold text-neutral-400 uppercase tracking-[0.15em]">{label}</span>
   </div>
 );
 
