@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function AdminNavbar() {
+export default function AdminNavbar({ onToggleMobileNav }: { onToggleMobileNav?: () => void }) {
   const pathname = usePathname();
 
   // Helper to format the page title based on the URL
@@ -18,8 +18,11 @@ export default function AdminNavbar() {
       
       {/* Left */}
       <div className="flex items-center gap-4">
-        {/* Mobile menu toggle (optional if we make it fully responsive) */}
-        <button className="md:hidden text-black focus:outline-none">
+        {/* Mobile menu toggle */}
+        <button 
+          onClick={onToggleMobileNav}
+          className="md:hidden text-black focus:outline-none p-1 rounded-md hover:bg-neutral-100 transition-colors"
+        >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>

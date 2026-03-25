@@ -4,7 +4,13 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function Sidebar() {
+export default function Sidebar({ 
+  isMobileNavOpen = false, 
+  setIsMobileNavOpen = () => {} 
+}: { 
+  isMobileNavOpen?: boolean;
+  setIsMobileNavOpen?: (open: boolean) => void;
+}) {
   const pathname = usePathname();
 
   const links = [
@@ -16,7 +22,11 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-[240px] h-screen bg-white border-r border-neutral-200 flex flex-col shrink-0 sticky top-0 hidden md:flex">
+    <aside className={`
+      w-[240px] h-screen bg-white border-r border-neutral-200 flex flex-col shrink-0 
+      fixed md:sticky top-0 left-0 z-50 transition-transform duration-300
+      ${isMobileNavOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0 md:shadow-none'}
+    `}>
       <div className="p-6">
         <Link href="/admin/dashboard" className="text-black font-bold text-2xl tracking-tighter hover:text-red-950 transition-colors">
           WokCity<span className="text-red-600">.</span>
@@ -31,6 +41,7 @@ export default function Sidebar() {
             <Link
               key={link.name}
               href={link.href}
+              onClick={() => setIsMobileNavOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm ${
                 isActive 
                   ? 'bg-red-50 text-red-600 border-l-4 border-red-600' 
