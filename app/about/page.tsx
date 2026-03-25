@@ -109,7 +109,7 @@ export default function AboutPage() {
       </section>
 
       {/* Main Container - same container width and spacing as the Shop page */}
-      <main className="w-full max-w-[1440px] mx-auto px-6 md:px-8 xl:px-24 py-16 flex flex-col gap-24 overflow-x-hidden">
+      <main className="w-full max-w-[1440px] mx-auto px-6 md:px-8 xl:px-24 py-12 md:py-16 flex flex-col gap-12 md:gap-16 overflow-x-hidden">
         
         {/* 2. Story Section — Main Narrative */}
         <section className="flex flex-col gap-12 lg:gap-16">

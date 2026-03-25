@@ -83,7 +83,7 @@ const AnimatedCard = ({ target, suffix, label, isFloat = false, icon }: Animated
   return (
     <div 
       ref={ref}
-      className="rounded-2xl border border-neutral-200 bg-white p-4 md:p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-center justify-center gap-2 group"
+      className="rounded-2xl border border-neutral-200 bg-white p-3 md:p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-center justify-center gap-2 group"
     >
       <div className="text-neutral-400 mb-2 md:mb-4 group-hover:text-black transition-colors duration-300">
         {icon}
@@ -108,9 +108,9 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 py-16">
-      <div className="rounded-3xl bg-neutral-50 p-4 sm:p-6 md:p-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-8">
+    <section className="w-full max-w-[1200px] mx-auto px-3 sm:px-6">
+      <div className="rounded-3xl bg-neutral-50 p-3 sm:p-6 md:p-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-8">
           {stats.map((stat, idx) => (
             <AnimatedCard key={idx} {...stat} />
           ))}
