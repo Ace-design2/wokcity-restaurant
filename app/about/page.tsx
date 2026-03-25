@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
+import NavbarFloating from '@/components/NavbarFloating';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import JourneySlider, { SlideData } from '@/components/JourneySlider';
@@ -74,7 +74,7 @@ const StarIcon = () => (
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
+      <NavbarFloating />
 
       {/* 1. Hero Section — Story Introduction */}
       <section className="w-full h-[420px] md:h-auto relative flex items-center shrink-0 overflow-hidden bg-black">

@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
+import NavbarFloating from '@/components/NavbarFloating';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -37,7 +37,7 @@ const EmailIcon = () => (
 export default function ContactPage() {
   return (
     <>
-      <Navbar />
+      <NavbarFloating />
 
       {/* 1. Hero Section — Contact Introduction */}
       <section className="w-full h-[420px] relative flex items-center justify-start shrink-0 overflow-hidden bg-black">

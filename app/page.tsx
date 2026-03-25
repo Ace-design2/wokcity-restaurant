@@ -1,4 +1,4 @@
-import Navbar from '@/components/Navbar';
+import NavbarFloating from '@/components/NavbarFloating';
 import Hero from '@/components/Hero';
 import ProductGrid from '@/components/ProductGrid';
 import CartPanel from '@/components/CartPanel';
@@ -6,7 +6,7 @@ import CartPanel from '@/components/CartPanel';
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <NavbarFloating />
       
       {/* Full width hero section */}
       <Hero />
