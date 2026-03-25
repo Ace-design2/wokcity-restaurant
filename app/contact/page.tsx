@@ -40,7 +40,7 @@ export default function ContactPage() {
       <NavbarFloating />
 
       {/* 1. Hero Section — Contact Introduction */}
-      <section className="w-full h-[420px] relative flex items-center justify-start shrink-0 overflow-hidden bg-black pt-[104px] pb-12">
+      <section className="w-full h-[420px] md:h-auto relative flex items-center justify-start shrink-0 overflow-hidden bg-black pt-[88px]">
         <img 
           src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=2000" 
           alt="WokCity Restaurant Interior" 
@@ -49,7 +49,7 @@ export default function ContactPage() {
         {/* Dark gradient overlay matching the design system */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent z-10" />
         
-        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-8 xl:px-24">
+        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-8 md:py-16 xl:px-24">
           <div className="max-w-xl text-left">
             <span className="inline-block text-white text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-80">
               CONTACT US
