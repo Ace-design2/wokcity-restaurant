@@ -9,12 +9,28 @@ export default function NavbarFloating() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
 
   const navLinks = [
-    { name: 'Menu', href: '/' },
-    { name: 'Our Story', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { 
+      name: 'Menu', 
+      href: '/', 
+      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg>,
+      description: "Explore our signature woks"
+    },
+    { 
+      name: 'Our Story', 
+      href: '/about', 
+      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>,
+      description: "The heritage behind WokCity"
+    },
+    { 
+      name: 'Contact', 
+      href: '/contact', 
+      icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>,
+      description: "Get in touch with us"
+    },
   ];
 
   useEffect(() => {
@@ -31,6 +47,20 @@ export default function NavbarFloating() {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    }
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const activeIndex = navLinks.findIndex(link => link.href === pathname);
@@ -136,6 +166,7 @@ export default function NavbarFloating() {
       </nav>
 
       <div 
+        ref={mobileMenuRef}
         className={`md:hidden w-full max-w-[1200px] pointer-events-auto bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg border border-neutral-100 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
           isMobileMenuOpen ? 'max-h-[500px] mt-3 opacity-100 scale-100' : 'max-h-0 mt-0 opacity-0 scale-95 pointer-events-none border-transparent'
         }`}
@@ -148,13 +179,25 @@ export default function NavbarFloating() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-lg block px-4 py-3 rounded-xl transition-all duration-200 ${
+                className={`flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 ${
                   isActive 
-                    ? 'font-bold text-black bg-neutral-50' 
-                    : 'font-medium text-neutral-500 hover:text-black hover:bg-neutral-50'
+                    ? 'bg-neutral-50 shadow-sm' 
+                    : 'hover:bg-neutral-50'
                 }`}
               >
-                {link.name}
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
+                  isActive ? 'bg-red-600 text-white border-red-600 shadow-sm' : 'bg-red-50 text-red-600 border-red-100'
+                }`}>
+                  {link.icon}
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <span className={`text-base font-bold ${isActive ? 'text-black' : 'text-neutral-700'}`}>
+                    {link.name}
+                  </span>
+                  <span className="text-xs font-medium text-neutral-400">
+                    {link.description}
+                  </span>
+                </div>
               </Link>
             );
           })}
