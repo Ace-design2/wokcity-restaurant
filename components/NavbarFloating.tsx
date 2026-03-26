@@ -34,7 +34,7 @@ export default function NavbarFloating() {
     <div className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 w-full flex flex-col items-center pointer-events-none">
       {/* Navbar Container */}
       <nav 
-        className={`w-full max-w-[1200px] pointer-events-auto rounded-2xl flex items-center justify-between px-6 md:px-8 xl:px-12 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform border ${
+        className={`w-full max-w-[1200px] pointer-events-auto rounded-full flex items-center justify-between px-6 md:px-8 xl:px-12 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform border ${
           isScrolled 
             ? 'h-[56px] bg-white/90 backdrop-blur-md shadow-md border-neutral-200' 
             : 'h-[64px] bg-white/80 backdrop-blur-md shadow-sm border-neutral-100/50'
@@ -103,8 +103,10 @@ export default function NavbarFloating() {
 
       {/* Mobile Menu Panel */}
       <div 
-        className={`md:hidden w-full max-w-[1200px] pointer-events-auto bg-white/95 backdrop-blur-xl rounded-2xl shadow-lg border border-neutral-100 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-          isMobileMenuOpen ? 'max-h-[400px] mt-3 opacity-100' : 'max-h-0 mt-0 opacity-0 pointer-events-none border-transparent'
+        className={`md:hidden w-full max-w-[1200px] pointer-events-auto bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg border border-neutral-100 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          isScrolled ? 'max-h-[400px] mt-2 opacity-100' : 'max-h-[400px] mt-3 opacity-100'
+        } ${
+          isMobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 mt-0 opacity-0 pointer-events-none border-transparent'
         }`}
       >
         <div className="flex flex-col p-4 space-y-2">
