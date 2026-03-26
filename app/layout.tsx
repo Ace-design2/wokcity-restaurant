@@ -25,7 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSans.className} antialiased bg-neutral-50 min-h-screen flex flex-col overflow-x-hidden w-full`}>
-        <NextTopLoader color="#dc2626" height={3} showSpinner={false} />
+        <NextTopLoader 
+          color="#dc2626" 
+          height={3} 
+          showSpinner={false} 
+          initialPosition={0.3} 
+          crawlSpeed={200}
+          speed={400}
+          easing="ease"
+          shadow="0 0 10px #dc2626,0 0 5px #dc2626"
+        />
         <CartProvider>
           {children}
           <Footer />
