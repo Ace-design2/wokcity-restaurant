@@ -24,6 +24,17 @@ export default function NavbarFloating() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleOrderClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === '/') {
+      e.preventDefault();
+      const menuSection = document.getElementById('menu');
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   const navLinks = [
     { name: 'Menu', href: '/' },
     { name: 'Our Story', href: '/about' },
@@ -74,8 +85,9 @@ export default function NavbarFloating() {
         {/* Right: Primary Action Button (Desktop) & Hamburger Menu (Mobile) */}
         <div className="flex items-center shrink-0">
           <Link 
-            href="/order"
-            className="hidden md:inline-flex items-center justify-center bg-black text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-all hover:scale-105 hover:shadow-md active:scale-95"
+            href="/#menu"
+            onClick={handleOrderClick}
+            className="hidden md:inline-flex items-center justify-center bg-black text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all hover:scale-105 hover:shadow-md active:scale-95"
           >
             Order Now
           </Link>
@@ -129,9 +141,9 @@ export default function NavbarFloating() {
           })}
           <div className="pt-2">
             <Link
-              href="/order"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-center w-full bg-black text-white text-base font-medium py-3.5 rounded-xl transition-all hover:bg-neutral-800 active:scale-95 shadow-sm"
+              href="/#menu"
+              onClick={handleOrderClick}
+              className="flex items-center justify-center w-full bg-black text-white text-base font-medium py-3.5 rounded-full transition-all hover:bg-neutral-800 active:scale-95 shadow-sm"
             >
               Order Now
             </Link>
