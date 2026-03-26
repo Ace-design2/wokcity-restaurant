@@ -10,6 +10,7 @@ export default function NavbarFloating() {
   const pathname = usePathname();
   const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
 
   const navLinks = [
@@ -50,7 +51,12 @@ export default function NavbarFloating() {
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+      if (
+        mobileMenuRef.current && 
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        toggleButtonRef.current &&
+        !toggleButtonRef.current.contains(event.target as Node)
+      ) {
         setIsMobileMenuOpen(false);
       }
     }
@@ -145,6 +151,7 @@ export default function NavbarFloating() {
           </Link>
           
           <button 
+            ref={toggleButtonRef}
             className="md:hidden text-black focus:outline-none relative w-8 h-8 flex items-center justify-center active:scale-90 transition-transform ml-4" 
             aria-label="Toggle Mobile Menu"
             aria-expanded={isMobileMenuOpen}
