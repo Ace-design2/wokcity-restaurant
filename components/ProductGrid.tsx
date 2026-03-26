@@ -86,6 +86,21 @@ export default function ProductGrid() {
   const [sortOrder, setSortOrder] = useState("Recommended");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+
+  useEffect(() => {
+    const activeIndex = CATEGORIES.indexOf(activeCategory);
+    const activeTab = tabsRef.current[activeIndex];
+    
+    if (activeTab) {
+      setIndicatorStyle({
+        left: activeTab.offsetLeft,
+        width: activeTab.offsetWidth,
+      });
+    }
+  }, [activeCategory]);
+
   const filteredAndSortedProducts = useMemo(() => {
     let result = [...MOCK_PRODUCTS];
 
@@ -118,20 +133,29 @@ export default function ProductGrid() {
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
         
         {/* Category Minimal Links */}
-        <div className="flex gap-4 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {CATEGORIES.map(cat => (
+        <div className="relative flex gap-4 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {CATEGORIES.map((cat, idx) => (
             <button
               key={cat}
+              ref={(el) => { tabsRef.current[idx] = el; }}
               onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap pb-1.5 text-sm font-medium transition-all focus:outline-none border-b-2 ${
+              className={`relative z-10 whitespace-nowrap pb-1.5 text-sm font-medium transition-colors focus:outline-none ${
                 activeCategory === cat 
-                  ? "border-red-950 text-black" 
-                  : "border-transparent text-neutral-500 hover:text-black"
+                  ? "text-black" 
+                  : "text-neutral-500 hover:text-black"
               }`}
             >
               {cat}
             </button>
           ))}
+          {/* Sliding Indicator */}
+          <span 
+            className="absolute bottom-2 lg:bottom-0 left-0 h-[2px] bg-red-950 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-20 pointer-events-none"
+            style={{ 
+              transform: `translateX(${indicatorStyle.left}px)`, 
+              width: `${indicatorStyle.width}px` 
+            }}
+          />
         </div>
 
         {/* Custom Minimal Tooltips (Price & Sort) */}
