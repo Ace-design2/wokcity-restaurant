@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 
 import { CartProvider } from "@/contexts/CartContext";
 import Footer from "@/components/Footer";
+import NextTopLoader from 'nextjs-toploader';
 
 export default function RootLayout({
   children,
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSans.className} antialiased bg-neutral-50 min-h-screen flex flex-col overflow-x-hidden w-full`}>
+        <NextTopLoader color="#dc2626" height={3} showSpinner={false} />
         <CartProvider>
           {children}
           <Footer />
