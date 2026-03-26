@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -8,6 +8,14 @@ export default function NavbarFloating() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+
+  const navLinks = [
+    { name: 'Menu', href: '/' },
+    { name: 'Our Story', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +32,20 @@ export default function NavbarFloating() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const activeIndex = navLinks.findIndex(link => link.href === pathname);
+    const activeEl = navRefs.current[activeIndex];
+    
+    if (activeEl) {
+      setIndicatorStyle({
+        left: activeEl.offsetLeft,
+        width: activeEl.offsetWidth,
+      });
+    } else {
+      setIndicatorStyle({ left: 0, width: 0 });
+    }
+  }, [pathname]);
+
   const handleOrderClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === '/') {
       e.preventDefault();
@@ -34,12 +56,6 @@ export default function NavbarFloating() {
       setIsMobileMenuOpen(false);
     }
   };
-
-  const navLinks = [
-    { name: 'Menu', href: '/' },
-    { name: 'Our Story', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-  ];
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 pt-4 px-4 w-full flex flex-col items-center pointer-events-none">
@@ -61,25 +77,31 @@ export default function NavbarFloating() {
         </Link>
 
         {/* Center: Navigation Links (Desktop) */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => {
+        <div className="hidden md:flex items-center space-x-8 relative">
+          {navLinks.map((link, idx) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative text-sm font-medium transition-colors duration-200 group ${
+                ref={(el) => { navRefs.current[idx] = el; }}
+                className={`relative z-10 text-sm font-medium transition-colors duration-200 py-1 ${
                   isActive ? 'text-black font-bold' : 'text-neutral-600 hover:text-red-600'
                 }`}
               >
                 {link.name}
-                {/* Active Underline */}
-                {isActive && (
-                  <span className="absolute left-0 bottom-[-4px] w-full h-[2px] bg-red-600 rounded-full" />
-                )}
               </Link>
             );
           })}
+          {/* Sliding Indicator (Desktop) */}
+          <span 
+            className="absolute bottom-[-4px] left-0 h-[2px] bg-red-600 rounded-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-0"
+            style={{ 
+              transform: `translateX(${indicatorStyle.left}px)`, 
+              width: `${indicatorStyle.width}px`,
+              opacity: indicatorStyle.width > 0 ? 1 : 0
+            }}
+          />
         </div>
 
         {/* Right: Primary Action Button (Desktop) & Hamburger Menu (Mobile) */}
@@ -113,12 +135,9 @@ export default function NavbarFloating() {
         </div>
       </nav>
 
-      {/* Mobile Menu Panel */}
       <div 
         className={`md:hidden w-full max-w-[1200px] pointer-events-auto bg-white/95 backdrop-blur-xl rounded-3xl shadow-lg border border-neutral-100 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-          isScrolled ? 'max-h-[400px] mt-2 opacity-100' : 'max-h-[400px] mt-3 opacity-100'
-        } ${
-          isMobileMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 mt-0 opacity-0 pointer-events-none border-transparent'
+          isMobileMenuOpen ? 'max-h-[500px] mt-3 opacity-100 scale-100' : 'max-h-0 mt-0 opacity-0 scale-95 pointer-events-none border-transparent'
         }`}
       >
         <div className="flex flex-col p-4 space-y-2">
