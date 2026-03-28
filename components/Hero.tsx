@@ -24,9 +24,9 @@ export default function Hero() {
           <p className="text-lg sm:text-xl text-white font-medium max-w-lg mx-auto md:mx-0 mb-6 md:mb-8 leading-relaxed">
             Fresh ingredients, intense heat, and authentic flavors delivered straight to your door.
           </p>
-          <button className="px-6 py-3 md:px-8 md:py-4 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-100 hover:scale-105 active:scale-95 transition-all focus:outline-none shadow-lg">
+          <a href="#menu" className="inline-block px-6 py-3 md:px-8 md:py-4 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-100 hover:scale-105 active:scale-95 transition-all focus:outline-none shadow-lg">
             Order Now
-          </button>
+          </a>
         </div>
       </div>
     </section>
