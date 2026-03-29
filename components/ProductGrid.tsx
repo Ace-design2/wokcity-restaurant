@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import ProductCard from './ProductCard';
 import ProductModal from './ProductModal';
+import StickyFiltersBar from './StickyFiltersBar';
 
 type Product = {
   id: string;
@@ -24,162 +25,93 @@ const MOCK_PRODUCTS = Array.from({ length: 24 }).map((_, i) => ({
   imageUrl: `/images/food${(i % 10) + 1}.jpg`,
 }));
 
-type DropdownProps = {
-  label: string;
-  value: string;
-  options: string[];
-  onChange: (val: string) => void;
-  align?: 'left' | 'right';
-};
-
-// Custom Tooltip Dropdown Component
-function MinimalDropdown({ label, value, options, onChange, align = 'right' }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <button 
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-neutral-100 transition-colors focus:outline-none"
-      >
-        <span className="text-sm text-neutral-500">{label}:</span>
-        <span className="text-sm font-medium text-black">{value}</span>
-        <svg fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`w-3.5 h-3.5 text-neutral-400 transition-transform ${isOpen ? "rotate-180" : ""}`} viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-
-      {isOpen && (
-        <div className={`absolute top-full ${align === 'left' ? 'left-0' : 'right-0'} mt-2 w-48 bg-white border border-neutral-100/80 rounded-lg shadow-xl shadow-black-[0.03] py-2 z-50`}>
-          {options.map(opt => (
-            <button
-              key={opt}
-              onClick={() => { onChange(opt); setIsOpen(false); }}
-              className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                value === opt 
-                  ? "text-red-950 font-semibold bg-red-50/50" 
-                  : "text-neutral-600 hover:text-black hover:bg-neutral-50"
-              }`}
-            >
-              {opt}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function ProductGrid() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  /**
+   * activeCategories — empty = "All" (show everything).
+   * Multiple categories can be selected; products matching
+   * any selected category are shown (union).
+   */
+  const [activeCategories, setActiveCategories] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState("All Prices");
   const [sortOrder, setSortOrder] = useState("Recommended");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
-
-  useEffect(() => {
-    const activeIndex = CATEGORIES.indexOf(activeCategory);
-    const activeTab = tabsRef.current[activeIndex];
-    
-    if (activeTab) {
-      setIndicatorStyle({
-        left: activeTab.offsetLeft,
-        width: activeTab.offsetWidth,
-      });
+  /** Toggle a category on/off. "All" always resets to empty (show everything). */
+  const toggleCategory = (cat: string) => {
+    if (cat === "All") {
+      setActiveCategories([]);
+      return;
     }
-  }, [activeCategory]);
+    setActiveCategories(prev =>
+      prev.includes(cat)
+        ? prev.filter(c => c !== cat)   // deselect
+        : [...prev, cat]                // select
+    );
+  };
 
-  const filteredAndSortedProducts = useMemo(() => {
+  const filteredProducts = useMemo(() => {
     let result = [...MOCK_PRODUCTS];
 
-    if (activeCategory !== "All") {
-      result = result.filter(p => p.category === activeCategory);
+    // Search — matches name or category
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)
+      );
     }
 
-    if (priceRange === "Under ₦20,000") {
-      result = result.filter(p => p.price < 20000);
-    } else if (priceRange === "₦20,000 - ₦35,000") {
-      result = result.filter(p => p.price >= 20000 && p.price <= 35000);
-    } else if (priceRange === "Over ₦35,000") {
-      result = result.filter(p => p.price > 35000);
+    // Category — union of all selected, empty = all
+    if (activeCategories.length > 0) {
+      result = result.filter(p => activeCategories.includes(p.category));
     }
 
-    if (sortOrder === "Price: Ascending") {
-      result.sort((a, b) => a.price - b.price);
-    } else if (sortOrder === "Price: Descending") {
-      result.sort((a, b) => b.price - a.price);
-    } else if (sortOrder === "Alphabetical (A-Z)") {
-      result.sort((a, b) => a.name.localeCompare(b.name));
-    }
+    // Price
+    if (priceRange === "Under ₦20,000") result = result.filter(p => p.price < 20000);
+    else if (priceRange === "₦20,000 - ₦35,000") result = result.filter(p => p.price >= 20000 && p.price <= 35000);
+    else if (priceRange === "Over ₦35,000") result = result.filter(p => p.price > 35000);
+
+    // Sort
+    if (sortOrder === "Price: Ascending") result.sort((a, b) => a.price - b.price);
+    else if (sortOrder === "Price: Descending") result.sort((a, b) => b.price - a.price);
+    else if (sortOrder === "Alphabetical (A-Z)") result.sort((a, b) => a.name.localeCompare(b.name));
 
     return result;
-  }, [activeCategory, priceRange, sortOrder]);
+  }, [activeCategories, priceRange, sortOrder, searchQuery]);
 
   return (
     <div className="w-full">
-      {/* Filters & Sorting Minimal Bar */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
-        
-        {/* Category Minimal Links */}
-        <div className="relative flex gap-4 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 hide-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          {CATEGORIES.map((cat, idx) => (
-            <button
-              key={cat}
-              ref={(el) => { tabsRef.current[idx] = el; }}
-              onClick={() => setActiveCategory(cat)}
-              className={`relative z-10 whitespace-nowrap pb-1.5 text-sm font-medium transition-colors focus:outline-none ${
-                activeCategory === cat 
-                  ? "text-black" 
-                  : "text-neutral-500 hover:text-black"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-          {/* Sliding Indicator */}
-          <span 
-            className="absolute bottom-2 lg:bottom-0 left-0 h-[2px] bg-red-950 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-20 pointer-events-none"
-            style={{ 
-              transform: `translateX(${indicatorStyle.left}px)`, 
-              width: `${indicatorStyle.width}px` 
-            }}
-          />
-        </div>
+      <StickyFiltersBar
+        activeCategories={activeCategories}
+        toggleCategory={toggleCategory}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+        sortOrder={sortOrder}
+        setSortOrder={setSortOrder}
+      />
 
-        {/* Custom Minimal Tooltips (Price & Sort) */}
-        <div className="flex items-center gap-1 w-full lg:w-auto mt-2 lg:mt-0 pt-4 lg:pt-0 border-t border-neutral-200 lg:border-t-0">
-          <MinimalDropdown 
-            label="Price"
-            value={priceRange}
-            options={["All Prices", "Under ₦20,000", "₦20,000 - ₦35,000", "Over ₦35,000"]}
-            onChange={setPriceRange}
-            align="left"
-          />
-          <span className="w-px h-4 bg-neutral-200 mx-2" />
-          <MinimalDropdown 
-            label="Sort"
-            value={sortOrder}
-            options={["Recommended", "Price: Ascending", "Price: Descending", "Alphabetical (A-Z)"]}
-            onChange={setSortOrder}
-          />
-        </div>
-      </div>
+      {/* Active search summary */}
+      {searchQuery.trim() && (
+        <p className="text-sm text-neutral-500 mb-6">
+          Results for{" "}
+          <span className="font-semibold text-black">&ldquo;{searchQuery}&rdquo;</span>{" — "}
+          <span className="font-medium text-black">{filteredProducts.length}</span>{" "}
+          {filteredProducts.length === 1 ? "item" : "items"} found
+          <button
+            onClick={() => setSearchQuery("")}
+            className="ml-3 text-xs text-neutral-400 hover:text-black underline transition-colors focus:outline-none"
+          >
+            Clear
+          </button>
+        </p>
+      )}
 
-      {filteredAndSortedProducts.length > 0 ? (
+      {/* Grid */}
+      {filteredProducts.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 sm:gap-x-8 lg:gap-x-4 xl:gap-x-8 gap-y-6 sm:gap-y-10 lg:gap-y-6 xl:gap-y-10">
-          {filteredAndSortedProducts.map((product) => (
+          {filteredProducts.map(product => (
             <div key={product.id} className="flex justify-center">
               <ProductCard
                 id={product.id}
@@ -195,8 +127,8 @@ export default function ProductGrid() {
       ) : (
         <div className="py-24 text-center">
           <p className="text-xl text-neutral-400 font-light">No products found matching your criteria.</p>
-          <button 
-            onClick={() => { setActiveCategory("All"); setPriceRange("All Prices"); setSortOrder("Recommended"); }} 
+          <button
+            onClick={() => { setActiveCategories([]); setPriceRange("All Prices"); setSortOrder("Recommended"); setSearchQuery(""); }}
             className="mt-6 text-sm text-black border-b border-black font-medium hover:text-neutral-600 hover:border-neutral-600 transition-colors pb-0.5 focus:outline-none"
           >
             Clear all filters
@@ -204,11 +136,11 @@ export default function ProductGrid() {
         </div>
       )}
 
-      {/* Embedded Product Details Modal */}
-      <ProductModal 
-        isOpen={!!selectedProduct} 
-        onClose={() => setSelectedProduct(null)} 
-        product={selectedProduct} 
+      {/* Product Modal */}
+      <ProductModal
+        isOpen={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        product={selectedProduct}
       />
     </div>
   );
