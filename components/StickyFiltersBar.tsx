@@ -150,19 +150,16 @@ export default function StickyFiltersBar({
   return (
     <div className="w-full mb-10">
 
-      {/* ── Desktop: Single Row ──────────────────────────────────────── */}
-      <div className="hidden lg:flex items-center gap-4 border-b border-neutral-200 pb-4">
+      {/* ── Desktop: Two Rows ────────────────────────────────────────── */}
+      <div className="hidden lg:flex flex-col gap-3 border-b border-neutral-200 pb-4">
 
-        {/* LEFT — Category Tabs */}
-        <div
-          className="flex items-center gap-5 overflow-x-auto shrink-0 max-w-[340px]"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
+        {/* ROW 1 — All category tabs, full width, no cap, no scroll */}
+        <div className="flex items-center gap-6">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => toggleCategory(cat)}
-              className={`inline-flex items-center gap-1 whitespace-nowrap pb-3 text-sm transition-all duration-200 focus:outline-none border-b-2 ${
+              className={`inline-flex items-center gap-1 whitespace-nowrap pb-2 text-sm transition-all duration-200 focus:outline-none border-b-2 ${
                 isActive(cat)
                   ? "font-semibold text-black border-red-600"
                   : "font-medium text-neutral-400 hover:text-neutral-700 border-transparent"
@@ -178,40 +175,41 @@ export default function StickyFiltersBar({
           ))}
         </div>
 
-        {/* Divider */}
-        <span className="w-px h-5 bg-neutral-200 shrink-0" aria-hidden="true" />
+        {/* ROW 2 — Search + Sort/Price */}
+        <div className="flex items-center gap-3">
+          {/* Search — takes all remaining space */}
+          <div className="flex-1">
+            <SearchInput
+              id="menu-search-desktop"
+              value={searchQuery}
+              onChange={setSearchQuery}
+            />
+          </div>
 
-        {/* CENTER — Search */}
-        <div className="flex-1 min-w-[200px]">
-          <SearchInput
-            id="menu-search-desktop"
-            value={searchQuery}
-            onChange={setSearchQuery}
-          />
-        </div>
+          {/* Divider */}
+          <span className="w-px h-5 bg-neutral-200 shrink-0" aria-hidden="true" />
 
-        {/* Divider */}
-        <span className="w-px h-5 bg-neutral-200 shrink-0" aria-hidden="true" />
-
-        {/* RIGHT — Price + Sort */}
-        <div className="flex items-center gap-1 shrink-0">
-          <MinimalDropdown
-            label="Price"
-            value={priceRange}
-            options={["All Prices", "Under ₦20,000", "₦20,000 - ₦35,000", "Over ₦35,000"]}
-            onChange={setPriceRange}
-            align="right"
-          />
-          <span className="w-px h-4 bg-neutral-200 mx-1" aria-hidden="true" />
-          <MinimalDropdown
-            label="Sort"
-            value={sortOrder}
-            options={["Recommended", "Price: Ascending", "Price: Descending", "Alphabetical (A-Z)"]}
-            onChange={setSortOrder}
-            align="right"
-          />
+          {/* Price + Sort */}
+          <div className="flex items-center gap-1 shrink-0">
+            <MinimalDropdown
+              label="Price"
+              value={priceRange}
+              options={["All Prices", "Under ₦20,000", "₦20,000 - ₦35,000", "Over ₦35,000"]}
+              onChange={setPriceRange}
+              align="right"
+            />
+            <span className="w-px h-4 bg-neutral-200 mx-1" aria-hidden="true" />
+            <MinimalDropdown
+              label="Sort"
+              value={sortOrder}
+              options={["Recommended", "Price: Ascending", "Price: Descending", "Alphabetical (A-Z)"]}
+              onChange={setSortOrder}
+              align="right"
+            />
+          </div>
         </div>
       </div>
+
 
       {/* ── Mobile / Tablet ───────────────────────────────────────────── */}
       <div className="flex flex-col gap-4 lg:hidden border-b border-neutral-200 pb-4">
