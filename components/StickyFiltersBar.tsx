@@ -162,13 +162,18 @@ export default function StickyFiltersBar({
             <button
               key={cat}
               onClick={() => toggleCategory(cat)}
-              className={`whitespace-nowrap pb-3 text-sm transition-all duration-200 focus:outline-none border-b-2 ${
+              className={`inline-flex items-center gap-1 whitespace-nowrap pb-3 text-sm transition-all duration-200 focus:outline-none border-b-2 ${
                 isActive(cat)
                   ? "font-semibold text-black border-red-600"
                   : "font-medium text-neutral-400 hover:text-neutral-700 border-transparent"
               }`}
             >
               {cat}
+              {isActive(cat) && (
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className="mb-px opacity-60" aria-hidden="true">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              )}
             </button>
           ))}
         </div>
@@ -220,13 +225,18 @@ export default function StickyFiltersBar({
             <button
               key={cat}
               onClick={() => toggleCategory(cat)}
-              className={`shrink-0 whitespace-nowrap pb-3 text-sm transition-all duration-200 focus:outline-none border-b-2 ${
+              className={`inline-flex items-center gap-1 shrink-0 whitespace-nowrap pb-3 text-sm transition-all duration-200 focus:outline-none border-b-2 ${
                 isActive(cat)
                   ? "font-semibold text-black border-red-600"
                   : "font-medium text-neutral-400 hover:text-neutral-700 border-transparent"
               }`}
             >
               {cat}
+              {isActive(cat) && (
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className="mb-px opacity-60" aria-hidden="true">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              )}
             </button>
           ))}
         </div>
