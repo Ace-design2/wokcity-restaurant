@@ -7,8 +7,6 @@ import ProductGrid from '@/components/ProductGrid';
 import CartPanel from '@/components/CartPanel';
 
 // Skeletons
-import SkeletonNavbar from '@/components/skeletons/SkeletonNavbar';
-import SkeletonHero from '@/components/skeletons/SkeletonHero';
 import SkeletonCart from '@/components/skeletons/SkeletonCart';
 
 export default function Home() {
@@ -37,23 +35,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative">
-        <div className={`transition-opacity duration-300 ${loadingStep >= 1 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          <NavbarFloating />
-        </div>
-        <div className={`absolute top-0 left-0 w-full transition-opacity duration-300 ${loadingStep >= 1 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <SkeletonNavbar />
-        </div>
-      </div>
-
-      <div className="relative">
-        <div className={`transition-opacity duration-300 ${loadingStep >= 2 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          <Hero />
-        </div>
-        <div className={`absolute top-0 left-0 w-full transition-opacity duration-300 z-10 ${loadingStep >= 2 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <SkeletonHero />
-        </div>
-      </div>
+      <NavbarFloating />
+      <Hero />
 
       <main className="w-full max-w-[1440px] mx-auto flex flex-col lg:flex-row px-4 sm:px-8 xl:px-24 py-12 md:py-20 pb-32 lg:pb-20 gap-10 xl:gap-14 shrink-0 relative overflow-x-hidden">
 
