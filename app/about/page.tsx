@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import JourneySlider, { SlideData } from '@/components/JourneySlider';
 import StatsSection from '@/components/StatsSection';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
 
 const journeySlides: SlideData[] = [
   {
@@ -87,7 +88,7 @@ export default function AboutPage() {
         {/* Dark gradient overlay matching the design system */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent z-10" />
         
-        <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-8 md:py-16 xl:px-24">
+        <AnimateOnScroll className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-8 md:py-16 xl:px-24">
           <div className="max-w-xl text-left">
             <span className="inline-block text-white text-xs font-bold tracking-[0.2em] uppercase mb-4 opacity-80">
               Our Story
@@ -105,14 +106,14 @@ export default function AboutPage() {
               View Our Menu
             </Link>
           </div>
-        </div>
+        </AnimateOnScroll>
       </section>
 
       {/* Main Container - same container width and spacing as the Shop page */}
       <main className="w-full max-w-[1440px] mx-auto px-6 md:px-8 xl:px-24 py-12 md:py-16 flex flex-col gap-12 md:gap-16 overflow-x-hidden">
         
         {/* 2. Story Section — Main Narrative */}
-        <section className="flex flex-col gap-12 lg:gap-16">
+        <AnimateOnScroll className="flex flex-col gap-12 lg:gap-16">
           <div className="max-w-[800px] mb-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-black mb-8 tracking-tight">Our Journey</h2>
             <div className="space-y-6 text-neutral-500 font-medium text-lg leading-relaxed">
@@ -133,96 +134,120 @@ export default function AboutPage() {
               showArrows={true} 
             />
           </div>
-        </section>
+        </AnimateOnScroll>
 
         {/* 3. Highlight Points Section — Key Values */}
         <section>
-          <div className="max-w-[600px] mb-12">
+          <AnimateOnScroll className="max-w-[600px] mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-black tracking-tight mb-4">What Makes Us Different</h2>
             <p className="text-neutral-500 font-medium text-lg">We deliver excellence through a few core principles.</p>
-          </div>
+          </AnimateOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <HighlightCard 
-              icon={<LeafIcon />} 
-              title="Fresh Ingredients" 
-              description="We use quality ingredients sourced daily." 
-            />
-            <HighlightCard 
-              icon={<ClockIcon />} 
-              title="Fast Service" 
-              description="Quick meals without compromising taste." 
-            />
-            <HighlightCard 
-              icon={<CheckIcon />} 
-              title="Consistent Taste" 
-              description="Every dish meets our quality standard." 
-            />
-            <HighlightCard 
-              icon={<HeartIcon />} 
-              title="Customer First" 
-              description="Your satisfaction is our priority." 
-            />
-            <HighlightCard 
-              icon={<ShieldIcon />} 
-              title="Clean Environment" 
-              description="High hygiene and food safety standards." 
-            />
-            <HighlightCard 
-              icon={<StarIcon />} 
-              title="Affordable Meals" 
-              description="Great food at fair prices." 
-            />
+            <AnimateOnScroll delay={0.1}>
+              <HighlightCard 
+                icon={<LeafIcon />} 
+                title="Fresh Ingredients" 
+                description="We use quality ingredients sourced daily." 
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={0.2}>
+              <HighlightCard 
+                icon={<ClockIcon />} 
+                title="Fast Service" 
+                description="Quick meals without compromising taste." 
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={0.3}>
+              <HighlightCard 
+                icon={<CheckIcon />} 
+                title="Consistent Taste" 
+                description="Every dish meets our quality standard." 
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={0.4}>
+              <HighlightCard 
+                icon={<HeartIcon />} 
+                title="Customer First" 
+                description="Your satisfaction is our priority." 
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={0.1}>
+              <HighlightCard 
+                icon={<ShieldIcon />} 
+                title="Clean Environment" 
+                description="High hygiene and food safety standards." 
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={0.2}>
+              <HighlightCard 
+                icon={<StarIcon />} 
+                title="Affordable Meals" 
+                description="Great food at fair prices." 
+              />
+            </AnimateOnScroll>
           </div>
         </section>
 
         {/* 4. Stats Section — Trust Indicators */}
-        <StatsSection />
+        <AnimateOnScroll>
+          <StatsSection />
+        </AnimateOnScroll>
 
         {/* 5. Mission & Vision Section */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          <div className="rounded-xl border border-neutral-200 bg-white p-8 lg:p-10 hover:shadow-sm transition-shadow duration-300">
-            <h3 className="text-2xl font-bold text-black mb-4">Mission</h3>
-            <p className="text-neutral-500 font-medium text-lg leading-relaxed">
-              To serve delicious, high-quality meals quickly while delivering excellent customer service every day.
-            </p>
-          </div>
-          <div className="rounded-xl border border-neutral-200 bg-white p-8 lg:p-10 hover:shadow-sm transition-shadow duration-300">
-            <h3 className="text-2xl font-bold text-black mb-4">Vision</h3>
-            <p className="text-neutral-500 font-medium text-lg leading-relaxed">
-              To become Abeokuta’s most trusted fast-casual restaurant known for flavor, speed, and consistency.
-            </p>
-          </div>
+          <AnimateOnScroll delay={0.1} className="h-full">
+            <div className="rounded-xl border border-neutral-200 bg-white p-8 lg:p-10 hover:shadow-sm transition-shadow duration-300 h-full">
+              <h3 className="text-2xl font-bold text-black mb-4">Mission</h3>
+              <p className="text-neutral-500 font-medium text-lg leading-relaxed">
+                To serve delicious, high-quality meals quickly while delivering excellent customer service every day.
+              </p>
+            </div>
+          </AnimateOnScroll>
+          <AnimateOnScroll delay={0.2} className="h-full">
+            <div className="rounded-xl border border-neutral-200 bg-white p-8 lg:p-10 hover:shadow-sm transition-shadow duration-300 h-full">
+              <h3 className="text-2xl font-bold text-black mb-4">Vision</h3>
+              <p className="text-neutral-500 font-medium text-lg leading-relaxed">
+                To become Abeokuta’s most trusted fast-casual restaurant known for flavor, speed, and consistency.
+              </p>
+            </div>
+          </AnimateOnScroll>
         </section>
 
         {/* 6. Team / Kitchen Section */}
         <section>
-          <div className="text-center mb-12">
+          <AnimateOnScroll className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-black tracking-tight mb-4">Meet Our Kitchen</h2>
             <p className="text-neutral-500 font-medium text-lg max-w-2xl mx-auto">
               The passionate professionals behind every wok-tossed creation.
             </p>
-          </div>
+          </AnimateOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <TeamCard 
-              image="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=800"
-              name="Chef Michael"
-              role="Head Chef"
-            />
-            <TeamCard 
-              image="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?auto=format&fit=crop&q=80&w=800"
-              name="Sarah Johnson"
-              role="Kitchen Manager"
-            />
-            <TeamCard 
-              image="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800"
-              name="The Team"
-              role="Service Team"
-            />
+            <AnimateOnScroll delay={0.1}>
+              <TeamCard 
+                image="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=800"
+                name="Chef Michael"
+                role="Head Chef"
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={0.2}>
+              <TeamCard 
+                image="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?auto=format&fit=crop&q=80&w=800"
+                name="Sarah Johnson"
+                role="Kitchen Manager"
+              />
+            </AnimateOnScroll>
+            <AnimateOnScroll delay={0.3}>
+              <TeamCard 
+                image="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800"
+                name="The Team"
+                role="Service Team"
+              />
+            </AnimateOnScroll>
           </div>
         </section>
 
         {/* 7. CTA Section — Conversion Focus */}
-        <section className="text-center py-20 bg-neutral-100 rounded-[2rem] px-6">
+        <AnimateOnScroll className="text-center py-20 bg-neutral-100 rounded-[2rem] px-6">
           <h2 className="text-3xl lg:text-4xl font-bold text-black tracking-tight mb-8">
             Ready to taste the difference?
           </h2>
@@ -232,7 +257,7 @@ export default function AboutPage() {
           >
             Order Now
           </Link>
-        </section>
+        </AnimateOnScroll>
 
       </main>
     </>
